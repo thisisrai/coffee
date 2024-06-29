@@ -7,7 +7,7 @@ const Nav = (props) => {
   const navigate = useNavigate()
 
   return <header>
-    <h1>Job Search</h1>
+    <h1>Coffee Job</h1>
     <nav>
       {state.token ? <div onClick={() => {
         dispatch({ type: "logout"});
