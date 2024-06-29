@@ -57,3 +57,37 @@ Dashboard component
 .dashboard {
   text-align: center;
 }
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%; /* Adjust the width as needed */
+  margin: 0 auto;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: black;
+}
+
+td a {
+  color: blue;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}

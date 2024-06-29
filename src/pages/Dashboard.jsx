@@ -31,30 +31,43 @@ const Dashboard = (props) => {
       <Routes>
         <Route path=':action' element={<Form getJobs={getJobs} />} />
       </Routes>
-      <ul>
-        {jobs.map(job => {
-          return (
-            <div className="job" key={job.id}>
-            <h2>{job.title}</h2>
-            <h4>{job.application_url}</h4>
-            <h4>{job.company}</h4>
-            <button onClick={() => {
-              dispatch({type: "select", payload: job})
-              navigate("/dashboard/edit")
-            }}>Edit</button>
-            <button onClick={() => {
-              fetch(url + "/jobs/" + job.id, {
-                method: "delete",
-                headers: {
-                  Authorization: "bearer " + token
-                }
-              }).then(() => {getJobs()})
-              
-            }}>Delete</button>
-          </div>
-          )
-        })}
-      </ul>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Application URL</th>
+              <th>Company</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {jobs.map(job => (
+              <tr key={job.id}>
+                <td>{job.title}</td>
+                <td><a href={job.application_url} target="_blank" rel="noopener noreferrer">{job.application_url}</a></td>
+                <td>{job.company}</td>
+                <td>
+                  <button onClick={() => {
+                    dispatch({ type: "select", payload: job });
+                    navigate("/dashboard/edit");
+                  }}>Edit</button>
+                  <button onClick={() => {
+                    fetch(`${url}/jobs/${job.id}`, {
+                      method: "delete",
+                      headers: {
+                        Authorization: `bearer ${token}`
+                      }
+                    }).then(() => {
+                      getJobs();
+                    });
+                  }}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 
