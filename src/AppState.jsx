@@ -1,11 +1,25 @@
-import React, { useReducer } from "react"
+import React, { useContext, useReducer } from "react"
 
 //////////////////////
 // INITIAL STATE
 //////////////////////
 
 const initialState = {
-  url: "https://jobrepo.onrender.com/"
+  url: "https://jobrepo.onrender.com/",
+  token: null,
+  username: null,
+  jobs: null,
+  new: {
+    title: "",
+    application_url: "",
+    company: ""
+  },
+  edit: {
+    id: 0,
+    title: "",
+    application_url: "",
+    company: ""
+  }
 }
 
 //////////////////////
@@ -15,6 +29,23 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch(action.type){
+    case "auth":
+      let newState = { ...state, ...action.payload};
+      return newState;
+      break;
+    case "logout":
+      newState = { ...state, token: null, username: null};
+      window.localStorage.removeItem("auth")
+      return newState;
+      break;
+    case "getJobs":
+      newState = {...state, jobs: action.payload}
+      return newState
+      break;
+    case "select":
+      newState = {...state, edit: action.payload}
+      return newState
+      break;
     default:
       return state
   }
@@ -44,6 +75,6 @@ export const AppState = (props) => {
 // userAppState hook
 //////////////////////
 
-export const userAppState = () => {
-  return React.useContext(AppContext)
+export const useAppState = () => {
+  return useContext(AppContext)
 }

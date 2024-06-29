@@ -1,4 +1,59 @@
-h1,
-h2 {
-  color: blue;
+/* /////////////////////////
+nav component
+///////////////////////// */
+
+header {
+  text-align: center;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+header nav a {
+  color: black;
+  text-decoration: none;
+}
+
+header nav div {
+  font-size: larger;
+  background-color: crimson;
+  color: white;
+  width: 200px;
+  border-radius: 7px;
+  transition: background-color .2s, color .2s;
+  padding: 10px;
+}
+
+header nav div:hover {
+  background-color: burlywood;
+  color: crimson;
+}
+
+/* /////////////////////////
+auth component
+///////////////////////// */
+
+.auth form {
+  padding: 50px;
+}
+
+.auth form input {
+  background-color: crimson;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* /////////////////////////
+Dashboard component
+///////////////////////// */
+
+.dashboard {
+  text-align: center;
 }
