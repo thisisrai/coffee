@@ -3,13 +3,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env) => {
-  const { production } = env ? env : { production: false };
+  const production = env.production === "true";
 
   const main = {
     mode: "production",
     entry: "./src/index.jsx",
     output: {
-      filename: "bundle.js",
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "build"),
     },
     module: {
@@ -52,10 +52,6 @@ module.exports = (env) => {
         template: "./src/index.html",
       }),
     ],
-    output: {
-      filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "build"),
-    },
     optimization: {
       splitChunks: {
         chunks: "all",
@@ -64,14 +60,12 @@ module.exports = (env) => {
   };
 
   const dev = {
-    output: {
-      filename: "dev.js",
-      path: path.resolve(__dirname, "dev"),
-    },
     mode: "development",
     devtool: "inline-source-map",
     devServer: {
-      contentBase: "./dev",
+      static: {
+        directory: path.resolve(__dirname, "dev"),
+      },
       port: process.env.PORT,
     },
   };
