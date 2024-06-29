@@ -45,7 +45,7 @@ const Dashboard = (props) => {
             {jobs.map(job => (
               <tr key={job.id}>
                 <td>{job.title}</td>
-                <td><a href={job.application_url} target="_blank" rel="noopener noreferrer">{job.application_url}</a></td>
+                <td><a href={job.application_url.startsWith('http') ? job.application_url : `http://${job.application_url}`} target="_blank" >{job.application_url}</a></td>
                 <td>{job.company}</td>
                 <td>
                   <button onClick={() => {
