@@ -18,7 +18,7 @@ header nav a {
 
 header nav div {
   font-size: larger;
-  background-color: crimson;
+  background-color: #93cec3;
   color: white;
   width: 200px;
   border-radius: 7px;
@@ -27,8 +27,8 @@ header nav div {
 }
 
 header nav div:hover {
-  background-color: burlywood;
-  color: crimson;
+  background-color: #1aa780;
+  color: #93cec3;
 }
 
 /* /////////////////////////
@@ -40,7 +40,7 @@ auth component
 }
 
 .auth form input {
-  background-color: crimson;
+  background-color: #93cec3;
   color: white;
   padding: 8px;
   border-radius: 5px;
