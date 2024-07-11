@@ -2,6 +2,7 @@ import React from "react";
 import { useAppState } from "../AppState.jsx";
 import { Link, Route, Routes, useNavigate } from "react-router-dom"
 import Form from "../components/Form.jsx"
+import { formatDate } from "../helpers/dateHelper.js"
 
 const Dashboard = (props) => {
   const {state, dispatch} = useAppState()
@@ -35,6 +36,7 @@ const Dashboard = (props) => {
         <table>
           <thead>
             <tr>
+              <th>Last updated</th>
               <th>Title</th>
               <th>Application URL</th>
               <th>Company</th>
@@ -44,6 +46,7 @@ const Dashboard = (props) => {
           <tbody>
             {jobs.map(job => (
               <tr key={job.id}>
+                <td>{formatDate(job.updated_at)}</td>
                 <td>{job.title}</td>
                 <td><a href={job.application_url.startsWith('http') ? job.application_url : `http://${job.application_url}`} target="_blank" >{job.application_url}</a></td>
                 <td>{job.company}</td>
