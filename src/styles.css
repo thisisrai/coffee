@@ -4,15 +4,27 @@ nav component
 
 header {
   text-align: center;
+  padding: 20px;
+  background-color: #1aa780;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
 }
 
 header nav {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 header nav a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 
@@ -22,13 +34,27 @@ header nav div {
   color: white;
   width: 200px;
   border-radius: 7px;
-  transition: background-color .2s, color .2s;
+  transition: background-color 0.2s, color 0.2s;
   padding: 10px;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
 }
 
 header nav div:hover {
-  background-color: #1aa780;
+  background-color: #0f7a5d;
   color: #93cec3;
+}
+
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+  }
+
+  header nav div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 
 /* /////////////////////////
