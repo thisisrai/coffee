@@ -14,7 +14,7 @@ const Auth = (props) => {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    if (userData) {
+    if (userData && !userData.error) {
       const {token, user} = userData;
       dispatch({ type: "auth", payload: {token, username: user.username} });
       window.localStorage.setItem("auth", JSON.stringify({token, username: user.username}))
@@ -59,6 +59,11 @@ const Auth = (props) => {
   return (
     <div className="auth">
       <form onSubmit={handleSubmit}>
+        {userData && userData.error && (
+          <div className="error-message">
+            {userData.error}
+          </div>
+        )}
         <input type="text" name="username" placeholder="username/email" value={formData.username} onChange={handleChange}/>
         <input type="password" name="password" placeholder="password" value={formData.password} onChange={handleChange}/>
         <input type="submit" value={type} />
