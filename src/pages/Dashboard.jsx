@@ -8,6 +8,8 @@ const Dashboard = (props) => {
   const { state, dispatch } = useAppState();
   const { token, url, jobs } = state;
   const navigate = useNavigate();
+  const [editJobId, setEditJobId] = React.useState(null);
+  const [editFormData, setEditFormData] = React.useState({});
 
   const getJobs = async () => {
     const response = await fetch(url + "/jobs", {
@@ -15,14 +17,43 @@ const Dashboard = (props) => {
       headers: {
         Authorization: "bearer " + token
       }
-    })
-    const jobs = await response.json()
-    dispatch({type: "getJobs", payload: jobs})
-  }
+    });
+    const jobs = await response.json();
+    dispatch({ type: "getJobs", payload: jobs });
+  };
 
   React.useEffect(() => {
     getJobs();
   }, []);
+
+  const handleEditClick = (job) => {
+    setEditJobId(job.id);
+    setEditFormData({ ...job });
+  };
+
+  const handleCancelClick = () => {
+    setEditJobId(null);
+    setEditFormData({});
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditFormData({ ...editFormData, [name]: value });
+  };
+
+  const handleSaveClick = async () => {
+    await fetch(`${url}/jobs/${editJobId}`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + token
+      },
+      body: JSON.stringify(editFormData)
+    });
+    setEditJobId(null);
+    setEditFormData({});
+    getJobs();
+  };
 
   const loaded = () => (
     <div className="dashboard">
@@ -48,45 +79,73 @@ const Dashboard = (props) => {
             {jobs.map((job) => (
               <tr key={job.id}>
                 <td data-label="Last updated">{formatDate(job.updated_at)}</td>
-                <td data-label="Title">{job.title}</td>
-                <td data-label="Application URL">
-                  <a
-                    href={
-                      job.application_url.startsWith("http")
-                        ? job.application_url
-                        : `http://${job.application_url}`
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {job.application_url}
-                  </a>
-                </td>
-                <td data-label="Company">{job.company}</td>
-                <td data-label="Actions">
-                  <button
-                    onClick={() => {
-                      dispatch({ type: "select", payload: job });
-                      navigate("/dashboard/edit");
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => {
-                      fetch(`${url}/jobs/${job.id}`, {
-                        method: "delete",
-                        headers: {
-                          Authorization: `bearer ${token}`,
-                        },
-                      }).then(() => {
-                        getJobs();
-                      });
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
+                {editJobId === job.id ? (
+                  <>
+                    <td data-label="Title">
+                      <input
+                        type="text"
+                        name="title"
+                        value={editFormData.title}
+                        onChange={handleInputChange}
+                      />
+                    </td>
+                    <td data-label="Application URL">
+                      <input
+                        type="text"
+                        name="application_url"
+                        value={editFormData.application_url}
+                        onChange={handleInputChange}
+                      />
+                    </td>
+                    <td data-label="Company">
+                      <input
+                        type="text"
+                        name="company"
+                        value={editFormData.company}
+                        onChange={handleInputChange}
+                      />
+                    </td>
+                    <td data-label="Actions">
+                      <button onClick={handleSaveClick}>Save</button>
+                      <button onClick={handleCancelClick}>Cancel</button>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td data-label="Title">{job.title}</td>
+                    <td data-label="Application URL">
+                      <a
+                        href={
+                          job.application_url.startsWith("http")
+                            ? job.application_url
+                            : `http://${job.application_url}`
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {job.application_url}
+                      </a>
+                    </td>
+                    <td data-label="Company">{job.company}</td>
+                    <td data-label="Actions">
+                      <button onClick={() => handleEditClick(job)}>Edit</button>
+                      <button
+                        onClick={() => {
+                          fetch(`${url}/jobs/${job.id}`, {
+                            method: "delete",
+                            headers: {
+                              Authorization: `bearer ${token}`
+                            }
+                          }).then(() => {
+                            getJobs();
+                          });
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
