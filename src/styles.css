@@ -80,6 +80,29 @@ auth component
 Dashboard component
 ///////////////////////// */
 
+.add-job-button {
+  background-color: #1aa780;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  margin-bottom: 20px; /* Add some margin for spacing */
+  text-align: center;
+}
+
+.add-job-button:hover {
+  background-color: #138965;
+  color: #e0f7fa;
+}
+
+.add-job-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #138965;
+}
+
 .dashboard {
   text-align: center;
 }
@@ -96,7 +119,8 @@ table {
   margin: 0 auto;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -107,6 +131,8 @@ th {
   text-align: center;
   background-color: #f2f2f2;
   color: black;
+  cursor: pointer;
+  position: relative;
 }
 
 td a {
@@ -116,6 +142,12 @@ td a {
 
 td a:hover {
   text-decoration: underline;
+}
+
+th svg {
+  margin-left: 5px;
+  font-size: 0.8em;
+  vertical-align: middle;
 }
 
 /* /////////////////////////
@@ -154,4 +186,67 @@ Error Message Styles
   width: 80%; /* Set a width for the message box */
   text-align: center; /* Center the text */
   font-size: 1.1em; /* Slightly larger font */
+}
+
+/* /////////////////////////
+Form Component
+///////////////////////// */
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.form label {
+  font-size: 1em;
+  color: #333;
+}
+
+.form input[type="text"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form input[type="submit"],
+.form button[type="button"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1aa780;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form button[type="button"] {
+  background-color: #d9534f;
+}
+
+.form input[type="submit"]:hover,
+.form button[type="button"]:hover {
+  background-color: #138965;
+}
+
+.form button[type="button"]:hover {
+  background-color: #c9302c;
 }
