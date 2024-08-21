@@ -35,7 +35,7 @@ const Dashboard = () => {
   }, []);
 
   const sortedJobs = React.useMemo(() => {
-    let sortableJobs = [...jobs]; // Always work with an array
+    let sortableJobs = [...jobs];
     if (sortConfig.key !== null) {
       sortableJobs.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -55,7 +55,7 @@ const Dashboard = () => {
     if (sortConfig.key === key && sortConfig.direction === "ascending") {
       direction = "descending";
     } else if (sortConfig.key !== key) {
-      direction = "descending"; // Default to descending when a new column is sorted
+      direction = "descending";
     }
     setSortConfig({ key, direction });
   };
@@ -67,6 +67,39 @@ const Dashboard = () => {
     ) : (
       <FontAwesomeIcon icon={faCaretDown} />
     );
+  };
+
+  const handleEditClick = (job) => {
+    setEditJobId(job.id);
+    setEditFormData({ ...job });
+  };
+
+  const handleCancelClick = () => {
+    setEditJobId(null);
+    setEditFormData({});
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditFormData({ ...editFormData, [name]: value });
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      await fetch(`${url}/jobs/${editJobId}`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "bearer " + token,
+        },
+        body: JSON.stringify(editFormData),
+      });
+      setEditJobId(null);
+      setEditFormData({});
+      getJobs();
+    } catch (error) {
+      console.error("Error updating job:", error);
+    }
   };
 
   const loaded = () => (
