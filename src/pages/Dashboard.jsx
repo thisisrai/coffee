@@ -2,18 +2,14 @@ import React from "react";
 import { useAppState } from "../AppState.jsx";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Form from "../components/Form.jsx";
-import { formatDate } from "../helpers/dateHelper.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import JobRow from "../components/JobRow.jsx";
+import SortHeader from "../components/SortHeader.jsx";
 
 const Dashboard = () => {
   const { state, dispatch } = useAppState();
-  const { token, url, jobs = [] } = state; // Default jobs to an empty array
-  const navigate = useNavigate();
+  const { token, url, jobs = [] } = state;
   const [editJobId, setEditJobId] = React.useState(null);
   const [editFormData, setEditFormData] = React.useState({});
-
-  // Default sortConfig to "Last updated" in descending order (newest first)
   const [sortConfig, setSortConfig] = React.useState({
     key: "updated_at",
     direction: "descending",
@@ -60,15 +56,6 @@ const Dashboard = () => {
     setSortConfig({ key, direction });
   };
 
-  const getSortIcon = (key) => {
-    if (sortConfig.key !== key) return null;
-    return sortConfig.direction === "ascending" ? (
-      <FontAwesomeIcon icon={faCaretUp} />
-    ) : (
-      <FontAwesomeIcon icon={faCaretDown} />
-    );
-  };
-
   const handleEditClick = (job) => {
     setEditJobId(job.id);
     setEditFormData({ ...job });
@@ -77,6 +64,20 @@ const Dashboard = () => {
   const handleCancelClick = () => {
     setEditJobId(null);
     setEditFormData({});
+  };
+
+  const handleDeleteClick = async (id) => {
+    try {
+      await fetch(`${url}/jobs/${id}`, {
+        method: "delete",
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      getJobs();
+    } catch (error) {
+      console.error("Error deleting job:", error);
+    }
   };
 
   const handleInputChange = (event) => {
@@ -102,7 +103,7 @@ const Dashboard = () => {
     }
   };
 
-  const loaded = () => (
+  return (
     <div className="dashboard">
       <h1>Here's your applied Jobs</h1>
       <Link to="/dashboard/new">
@@ -115,101 +116,52 @@ const Dashboard = () => {
         <table>
           <thead>
             <tr>
-              <th onClick={() => requestSort("updated_at")}>
-                Last updated {getSortIcon("updated_at")}
-              </th>
-              <th onClick={() => requestSort("title")}>
-                Title {getSortIcon("title")}
-              </th>
-              <th onClick={() => requestSort("application_url")}>
-                Application URL {getSortIcon("application_url")}
-              </th>
-              <th onClick={() => requestSort("company")}>
-                Company {getSortIcon("company")}
-              </th>
+              <SortHeader
+                label="Last updated"
+                sortKey="updated_at"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortHeader
+                label="Title"
+                sortKey="title"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortHeader
+                label="Application URL"
+                sortKey="application_url"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortHeader
+                label="Company"
+                sortKey="company"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {sortedJobs.map((job) => (
-              <tr key={job.id}>
-                <td data-label="Last updated">{formatDate(job.updated_at)}</td>
-                {editJobId === job.id ? (
-                  <>
-                    <td data-label="Title">
-                      <input
-                        type="text"
-                        name="title"
-                        value={editFormData.title}
-                        onChange={handleInputChange}
-                      />
-                    </td>
-                    <td data-label="Application URL">
-                      <input
-                        type="text"
-                        name="application_url"
-                        value={editFormData.application_url}
-                        onChange={handleInputChange}
-                      />
-                    </td>
-                    <td data-label="Company">
-                      <input
-                        type="text"
-                        name="company"
-                        value={editFormData.company}
-                        onChange={handleInputChange}
-                      />
-                    </td>
-                    <td data-label="Actions">
-                      <button onClick={handleSaveClick}>Save</button>
-                      <button onClick={handleCancelClick}>Cancel</button>
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td data-label="Title">{job.title}</td>
-                    <td data-label="Application URL">
-                      <a
-                        href={
-                          job.application_url.startsWith("http")
-                            ? job.application_url
-                            : `http://${job.application_url}`
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {job.application_url}
-                      </a>
-                    </td>
-                    <td data-label="Company">{job.company}</td>
-                    <td data-label="Actions">
-                      <button onClick={() => handleEditClick(job)}>Edit</button>
-                      <button
-                        onClick={() => {
-                          fetch(`${url}/jobs/${job.id}`, {
-                            method: "delete",
-                            headers: {
-                              Authorization: `bearer ${token}`,
-                            },
-                          }).then(() => {
-                            getJobs();
-                          });
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </>
-                )}
-              </tr>
+              <JobRow
+                key={job.id}
+                job={job}
+                editJobId={editJobId}
+                editFormData={editFormData}
+                handleEditClick={handleEditClick}
+                handleCancelClick={handleCancelClick}
+                handleInputChange={handleInputChange}
+                handleSaveClick={handleSaveClick}
+                handleDeleteClick={handleDeleteClick}
+              />
             ))}
           </tbody>
         </table>
       </div>
     </div>
   );
-
-  return jobs ? loaded() : <h1>Loading...</h1>;
 };
 
 export default Dashboard;
