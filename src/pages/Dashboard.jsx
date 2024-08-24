@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
-import { Link, Route, Routes } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import JobRow from "../components/JobRow.jsx";
 import SortHeader from "../components/SortHeader.jsx";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const { state, dispatch } = useAppState();
   const { token, url, jobs = [] } = state;
-  const [editJobId, setEditJobId] = React.useState(null);
-  const [editFormData, setEditFormData] = React.useState({});
-  const [sortConfig, setSortConfig] = React.useState({
+  const [editJobId, setEditJobId] = useState(null);
+  const [editFormData, setEditFormData] = useState({});
+  const [sortConfig, setSortConfig] = useState({
     key: "updated_at",
     direction: "descending",
   });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getJobs = async () => {
-    const response = await fetch(url + "/jobs", {
+    const response = await fetch(`${url}/jobs`, {
       method: "get",
       headers: {
         Authorization: "bearer " + token,
@@ -26,12 +28,20 @@ const Dashboard = () => {
     dispatch({ type: "getJobs", payload: jobs });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getJobs();
   }, []);
 
-  const sortedJobs = React.useMemo(() => {
-    let sortableJobs = [...jobs];
+  const filteredJobs = useMemo(() => {
+    return jobs.filter(
+      (job) =>
+        job.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.company?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [jobs, searchQuery]);
+
+  const sortedJobs = useMemo(() => {
+    let sortableJobs = [...filteredJobs];
     if (sortConfig.key !== null) {
       sortableJobs.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -44,7 +54,7 @@ const Dashboard = () => {
       });
     }
     return sortableJobs;
-  }, [jobs, sortConfig]);
+  }, [filteredJobs, sortConfig]);
 
   const requestSort = (key) => {
     let direction = "ascending";
@@ -109,6 +119,15 @@ const Dashboard = () => {
       <Link to="/dashboard/new">
         <button className="add-job-button">Add Job</button>
       </Link>
+      <div>
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search by job title or company name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       <Routes>
         <Route path=":action" element={<Form getJobs={getJobs} />} />
       </Routes>
