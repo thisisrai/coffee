@@ -58,7 +58,7 @@ const JobRow = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              {job.application_url}
+              {job.application_url.substring(0, 20) + "..."}
             </a>
           </td>
           <td data-label="Company">{job.company}</td>
