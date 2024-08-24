@@ -47,7 +47,11 @@ const JobRow = ({
         </>
       ) : (
         <>
-          <td data-label="Title">{job.title}</td>
+          <td data-label="Title">
+            {job.title.length > 30
+              ? job.title.substring(0, 30) + "..."
+              : job.title}
+          </td>
           <td data-label="Application URL">
             <a
               href={
