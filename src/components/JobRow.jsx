@@ -1,5 +1,6 @@
 import React from "react";
 import { formatDate } from "../helpers/dateHelper.js";
+import "../styles/JobRow.css";
 
 const JobRow = ({
   job,
@@ -11,11 +12,57 @@ const JobRow = ({
   handleSaveClick,
   handleDeleteClick,
 }) => {
+  const statusOptions = ["pending", "Interviewing", "offer", "rejected"];
+
+  // Function to get the class name based on the status
+  const getStatusClassName = (status) => {
+    if (!status) {
+      return "status-custom"; // Handle null or undefined status
+    }
+    switch (status.toLowerCase()) {
+      case "pending":
+        return "status-pending";
+      case "interviewing":
+        return "status-interviewing";
+      case "offer":
+        return "status-offer";
+      case "rejected":
+        return "status-rejected";
+      default:
+        return "status-custom";
+    }
+  };
+
   return (
     <tr>
       <td data-label="Last updated">{formatDate(job.updated_at)}</td>
       {editJobId === job.id ? (
         <>
+          <td data-label="Status" className="status-cell">
+            <select
+              name="outcome"
+              value={editFormData.outcome}
+              onChange={handleInputChange}
+              className="status-select"
+            >
+              {statusOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+              <option value="">Custom</option>
+            </select>
+            {editFormData.outcome === "" && (
+              <input
+                type="text"
+                name="outcome"
+                value={editFormData.outcome}
+                onChange={handleInputChange}
+                placeholder="Enter custom status"
+                className="status-input"
+              />
+            )}
+          </td>
           <td data-label="Title">
             <input
               type="text"
@@ -47,6 +94,11 @@ const JobRow = ({
         </>
       ) : (
         <>
+          <td data-label="Status">
+            <span className={`status-pill ${getStatusClassName(job.outcome)}`}>
+              {job.outcome || "Custom"}
+            </span>
+          </td>
           <td data-label="Title">
             {job.title.length > 30
               ? job.title.substring(0, 30) + "..."

@@ -6,7 +6,17 @@ const Form = (props) => {
   const { state } = useAppState();
   const { token } = state;
   const { action } = useParams();
-  const [formData, setFormData] = React.useState(state[action]);
+
+  // Initialize formData with a default status of "pending"
+  const [formData, setFormData] = React.useState({
+    ...state[action],
+    outcome: state[action]?.outcome || "pending",
+  });
+
+  const [isCustomStatus, setIsCustomStatus] = React.useState(
+    formData.outcome === ""
+  );
+
   const navigate = useNavigate();
 
   const actions = {
@@ -32,8 +42,20 @@ const Form = (props) => {
     },
   };
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    if (value === "") {
+      setIsCustomStatus(true);
+      setFormData({ ...formData, outcome: "" });
+    } else {
+      setIsCustomStatus(false);
+      setFormData({ ...formData, outcome: value });
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event) => {
@@ -45,7 +67,7 @@ const Form = (props) => {
   };
 
   const handleCancel = () => {
-    navigate("/dashboard"); // Redirects to the dashboard or another page on cancel
+    navigate("/dashboard");
   };
 
   return (
@@ -56,22 +78,49 @@ const Form = (props) => {
           type="text"
           name="title"
           value={formData.title}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <label htmlFor="url">URL</label>
         <input
           type="text"
           name="application_url"
           value={formData.application_url}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <label htmlFor="company">Company</label>
         <input
           type="text"
           name="company"
           value={formData.company}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
+
+        {/* Status Field with Default "Pending" */}
+        <label htmlFor="outcome">Status</label>
+        <select
+          name="outcome"
+          value={isCustomStatus ? "" : formData.outcome}
+          onChange={handleSelectChange}
+          className="styled-select"
+        >
+          <option value="pending">Pending</option>
+          <option value="interviewing">Interviewing</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+          <option value="">Custom</option>
+        </select>
+
+        {isCustomStatus && (
+          <input
+            type="text"
+            name="outcome"
+            value={formData.outcome}
+            onChange={handleInputChange}
+            placeholder="Or write your own status"
+            className="custom-input"
+          />
+        )}
+
         <div className="button-group">
           <input type="submit" value={action} />
           <button type="button" onClick={handleCancel}>

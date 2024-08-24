@@ -1,0 +1,59 @@
+.status-cell {
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.status-select {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  width: 150px;
+}
+
+.status-input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  width: 150px;
+  margin-left: 10px;
+}
+
+/* Add styles for the status pills */
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+
+/* Define color classes for each status */
+.status-pending {
+  background-color: #f1c40f; /* Yellow */
+}
+
+.status-offer {
+  background-color: #27ae60; /* Green */
+}
+
+.status-interviewing {
+  background-color: #2ecc71; /* Light Green */
+}
+
+.status-rejected {
+  background-color: #e74c3c; /* Red */
+}
+
+.status-custom {
+  background-color: #7f8c8d; /* Grey */
+}

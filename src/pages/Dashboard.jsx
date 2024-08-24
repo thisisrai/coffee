@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppState } from "../AppState.jsx";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import JobRow from "../components/JobRow.jsx";
 import SortHeader from "../components/SortHeader.jsx";
@@ -119,6 +119,12 @@ const Dashboard = () => {
               <SortHeader
                 label="Last updated"
                 sortKey="updated_at"
+                sortConfig={sortConfig}
+                requestSort={requestSort}
+              />
+              <SortHeader
+                label="Status"
+                sortKey="outcome"
                 sortConfig={sortConfig}
                 requestSort={requestSort}
               />
