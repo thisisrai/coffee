@@ -35,6 +35,7 @@
   font-weight: bold;
   text-align: center;
   color: #fff;
+  background-color: #7f8c8d; /* Grey */
 }
 
 /* Define color classes for each status */
@@ -52,8 +53,4 @@
 
 .status-rejected {
   background-color: #e74c3c; /* Red */
-}
-
-.status-custom {
-  background-color: #7f8c8d; /* Grey */
 }

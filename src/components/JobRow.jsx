@@ -14,25 +14,6 @@ const JobRow = ({
 }) => {
   const statusOptions = ["pending", "Interviewing", "offer", "rejected"];
 
-  // Function to get the class name based on the status
-  const getStatusClassName = (status) => {
-    if (!status) {
-      return "status-custom"; // Handle null or undefined status
-    }
-    switch (status.toLowerCase()) {
-      case "pending":
-        return "status-pending";
-      case "interviewing":
-        return "status-interviewing";
-      case "offer":
-        return "status-offer";
-      case "rejected":
-        return "status-rejected";
-      default:
-        return "status-custom";
-    }
-  };
-
   return (
     <tr>
       <td data-label="Last updated">{formatDate(job.updated_at)}</td>
@@ -41,7 +22,7 @@ const JobRow = ({
           <td data-label="Status" className="status-cell">
             <select
               name="outcome"
-              value={editFormData.outcome}
+              value={editFormData.outcome || "custom"}
               onChange={handleInputChange}
               className="status-select"
             >
@@ -50,18 +31,19 @@ const JobRow = ({
                   {option}
                 </option>
               ))}
-              <option value="">Custom</option>
+              <option value="custom">Custom</option>
             </select>
-            {editFormData.outcome === "" && (
-              <input
-                type="text"
-                name="outcome"
-                value={editFormData.outcome}
-                onChange={handleInputChange}
-                placeholder="Enter custom status"
-                className="status-input"
-              />
-            )}
+            {editFormData.outcome &&
+              !statusOptions.includes(editFormData.outcome.toLowerCase()) && (
+                <input
+                  type="text"
+                  name="outcome"
+                  value={editFormData.outcome}
+                  onChange={handleInputChange}
+                  placeholder="Enter custom status"
+                  className="status-input"
+                />
+              )}
           </td>
           <td data-label="Title">
             <input
@@ -95,8 +77,12 @@ const JobRow = ({
       ) : (
         <>
           <td data-label="Status">
-            <span className={`status-pill ${getStatusClassName(job.outcome)}`}>
-              {job.outcome || "Custom"}
+            <span
+              className={`status-pill status-${
+                job.outcome ? job.outcome.toLowerCase() : "custom"
+              }`}
+            >
+              {job.outcome || "No status"}
             </span>
           </td>
           <td data-label="Title">
