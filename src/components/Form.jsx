@@ -122,10 +122,10 @@ const Form = (props) => {
         )}
 
         <div className="button-group">
-          <input type="submit" value={action} />
           <button type="button" onClick={handleCancel}>
-            Cancel
+            cancel
           </button>
+          <input type="submit" value={action} />
         </div>
       </form>
     </div>
