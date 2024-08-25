@@ -4,25 +4,28 @@ import { useAppState } from "../AppState.jsx";
 
 const Auth = (props) => {
   const { form } = useParams();
+  const type = form;
 
-  const type = form
   const [formData, setFormData] = React.useState({
     username: "",
     password: "",
-  })
+  });
   const [userData, setUserData] = React.useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (userData && !userData.error) {
-      const {token, user} = userData;
-      dispatch({ type: "auth", payload: {token, username: user.username} });
-      window.localStorage.setItem("auth", JSON.stringify({token, username: user.username}))
-      navigate("/dashboard")
+      const { token, user } = userData;
+      dispatch({ type: "auth", payload: { token, username: user.username } });
+      window.localStorage.setItem(
+        "auth",
+        JSON.stringify({ token, username: user.username })
+      );
+      navigate("/dashboard");
     }
   }, [userData]);
 
-  const {state, dispatch} = useAppState()
+  const { state, dispatch } = useAppState();
 
   const actions = {
     signup: () => {
@@ -32,7 +35,7 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json())
+      }).then((response) => response.json());
     },
     login: () => {
       return fetch(state.url + "/login", {
@@ -41,35 +44,49 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json())
-    }
-  }
+      }).then((response) => response.json());
+    },
+  };
 
   const handleChange = (event) => {
-    setFormData({...formData, [event.target.name]: event.target.value});
-  }
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: name === "username" ? value.toLowerCase() : value,
+    });
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     actions[type]().then((data) => {
-      setUserData(data)
-    })
-  }
+      setUserData(data);
+    });
+  };
 
   return (
     <div className="auth">
       <form onSubmit={handleSubmit}>
         {userData && userData.error && (
-          <div className="error-message">
-            {userData.error}
-          </div>
+          <div className="error-message">{userData.error}</div>
         )}
-        <input type="text" name="username" placeholder="username/email" value={formData.username} onChange={handleChange}/>
-        <input type="password" name="password" placeholder="password" value={formData.password} onChange={handleChange}/>
+        <input
+          type="text"
+          name="username"
+          placeholder="username/email"
+          value={formData.username}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
         <input type="submit" value={type} />
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Auth;
