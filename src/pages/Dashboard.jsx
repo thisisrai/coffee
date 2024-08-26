@@ -119,6 +119,9 @@ const Dashboard = () => {
       <Link to="/dashboard/new">
         <button className="add-job-button">Add Job</button>
       </Link>
+      <Routes>
+        <Route path=":action" element={<Form getJobs={getJobs} />} />
+      </Routes>
       <div>
         <input
           type="text"
@@ -128,9 +131,6 @@ const Dashboard = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <Routes>
-        <Route path=":action" element={<Form getJobs={getJobs} />} />
-      </Routes>
       <div className="table-container">
         <table>
           <thead>
