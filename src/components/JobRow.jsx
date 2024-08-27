@@ -16,7 +16,7 @@ const JobRow = ({
 
   return (
     <tr>
-      <td data-label="Last updated">{formatDate(job.updated_at)}</td>
+      <td data-label="Applied on">{formatDate(job.created_at)}</td>
       {editJobId === job.id ? (
         <>
           <td data-label="Status" className="status-cell">

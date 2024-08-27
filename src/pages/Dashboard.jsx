@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [editJobId, setEditJobId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [sortConfig, setSortConfig] = useState({
-    key: "updated_at",
+    key: "created_at",
     direction: "descending",
   });
   const [searchQuery, setSearchQuery] = useState("");
@@ -136,8 +136,8 @@ const Dashboard = () => {
           <thead>
             <tr>
               <SortHeader
-                label="Last updated"
-                sortKey="updated_at"
+                label="Applied on"
+                sortKey="created_at"
                 sortConfig={sortConfig}
                 requestSort={requestSort}
               />
