@@ -128,6 +128,74 @@ auth component
   color: white;
 }
 
+.top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999; /* Ensures it stays on top of other elements */
+}
+
+/* Styling the sandwich button */
+.sandwich-button {
+  border: none;
+  background-color: #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sandwich-button .line {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+}
+
+/* Styling the authentication card that shows the links */
+.auth-container {
+  position: absolute;
+  top: 70px; /* Adjust this based on the size of the sandwich button */
+  right: 0;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-card a {
+  text-decoration: none;
+}
+
+.auth-card div {
+  font-size: 1.2em;
+  margin: 10px 0;
+  background-color: #93cec3;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.auth-card div:hover {
+  background-color: #1aa780;
+  color: white;
+}
+
 .auth form {
   padding: 50px;
 }
@@ -286,7 +354,6 @@ th svg {
 /* /////////////////////////
 Home component
 ///////////////////////// */
-
 .home-wrapper {
   position: relative;
   width: 100%;
@@ -294,12 +361,22 @@ Home component
   overflow: hidden; /* Hide any overflow */
 }
 
+.background-video {
+  position: absolute;
+  object-fit: cover; /* Ensure the video covers the whole container without distortion */
+  z-index: -1; /* Ensure the video is behind the content */
+}
+
 .home-container {
   position: relative;
-  display: flex; /* Enable flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100vh; /* Ensure it takes full height */
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the content takes up the full viewport */
 }
 
 .home-container p {
@@ -309,17 +386,8 @@ Home component
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 600px;
+  max-width: 600px;
   display: inline-block;
-}
-
-.background-video {
-  position: fixed; /* Change to fixed to cover the entire viewport */
-  top: 0;
-  left: 0;
-  width: 100vw; /* Use viewport width */
-  height: 100vh; /* Use viewport height */
-  object-fit: cover; /* Ensure the video covers the container */
-  z-index: -1;
 }
 
 /* /////////////////////////
