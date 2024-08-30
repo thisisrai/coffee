@@ -32,20 +32,16 @@ const reducer = (state, action) => {
     case "auth":
       let newState = { ...state, ...action.payload };
       return newState;
-      break;
     case "logout":
       newState = { ...state, token: null, username: null };
       window.localStorage.removeItem("auth");
       return newState;
-      break;
     case "getJobs":
       newState = { ...state, jobs: action.payload };
       return newState;
-      break;
     case "select":
       newState = { ...state, edit: action.payload };
       return newState;
-      break;
     default:
       return state;
   }

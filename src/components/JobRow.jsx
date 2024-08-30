@@ -1,4 +1,3 @@
-import React from "react";
 import { formatDate } from "../helpers/dateHelper.js";
 import "../styles/JobRow.css";
 
