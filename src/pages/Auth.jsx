@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
@@ -6,14 +6,14 @@ const Auth = (props) => {
   const { form } = useParams();
   const type = form;
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const [userData, setUserData] = React.useState(null);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (userData && !userData.error) {
       const { token, user } = userData;
       dispatch({ type: "auth", payload: { token, username: user.username } });

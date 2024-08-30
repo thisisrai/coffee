@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
@@ -8,12 +8,12 @@ const Form = (props) => {
   const { action } = useParams();
 
   // Initialize formData with a default status of "pending"
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     ...state[action],
     outcome: state[action]?.outcome || "pending",
   });
 
-  const [isCustomStatus, setIsCustomStatus] = React.useState(
+  const [isCustomStatus, setIsCustomStatus] = useState(
     formData.outcome === ""
   );
 
