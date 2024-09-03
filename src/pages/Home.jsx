@@ -1,8 +1,8 @@
 const Home = () => {
   return (
     <div className="home-wrapper">
-      <video autoPlay loop muted style={{ width: "100%", height: "auto" }}>
-        <source src="coffeejob.mp4" type="video/mp4" />
+      <video controls>
+        <source src="/coffeejob.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="home-container">

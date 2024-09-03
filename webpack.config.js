@@ -6,7 +6,7 @@ module.exports = (env) => {
   const production = env.production === "true";
 
   const main = {
-    mode: "production",
+    mode: production ? "production" : "development",
     entry: "./src/index.jsx",
     output: {
       filename: "[name].bundle.js",
@@ -22,7 +22,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.m?\js$/,
+          test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
             loader: "babel-loader",
@@ -60,13 +60,12 @@ module.exports = (env) => {
   };
 
   const dev = {
-    mode: "development",
     devtool: "inline-source-map",
     devServer: {
       static: {
-        directory: path.resolve(__dirname, "dev"),
+        directory: path.resolve(__dirname, "public"), // Serve files from the public directory
       },
-      port: process.env.PORT,
+      port: process.env.PORT || 4000,
     },
   };
 
