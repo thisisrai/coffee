@@ -70,16 +70,16 @@ const Auth = (props) => {
           <div className="error-message">{userData.error}</div>
         )}
         <input
-          type="text"
+          type="email"
           name="username"
-          placeholder="username/email"
+          placeholder="Email"
           value={formData.username}
           onChange={handleChange}
         />
         <input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
         />
