@@ -28,7 +28,6 @@ const PieChart = ({ data }) => {
     labels: labels.map((status) => `${status} (${data[status]})`), // Display status with count
     datasets: [
       {
-        label: "Job Statuses",
         data: counts,
         backgroundColor: backgroundColors,
         hoverBackgroundColor: hoverBackgroundColors,
