@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
 const Auth = (props) => {
@@ -64,7 +64,7 @@ const Auth = (props) => {
   };
 
   return (
-    <div className="auth">
+    <div className="auth auth-form">
       <form onSubmit={handleSubmit}>
         {userData && userData.error && (
           <div className="error-message">{userData.error}</div>
@@ -83,8 +83,19 @@ const Auth = (props) => {
           value={formData.password}
           onChange={handleChange}
         />
-        <input type="submit" value={type} />
+        <input type="submit" value={type === "login" ? "Log In" : "Sign Up"} />
       </form>
+      {type === "login" && (
+        <div className="forgot-password">
+          Forgot Password?
+          <div>
+            <Link to="/password/forgot">I don't have a token</Link>
+          </div>
+          <div>
+            <Link to="/password/reset">I have a token</Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
