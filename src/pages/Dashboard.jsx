@@ -1,9 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 import Form from "../components/Form.jsx";
 import JobRow from "../components/JobRow.jsx";
 import SortHeader from "../components/SortHeader.jsx";
+import PieChart from "../components/PieChart.jsx"; // Import your PieChart component
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
@@ -113,23 +114,42 @@ const Dashboard = () => {
     }
   };
 
+  // Dynamically calculate job status counts
+  const jobStatusCounts = useMemo(() => {
+    const counts = {};
+    jobs.forEach((job) => {
+      const status = job.outcome || "Unknown";
+      counts[status] = (counts[status] || 0) + 1;
+    });
+    return counts;
+  }, [jobs]);
+
   return (
     <div className="dashboard">
       <h1>Here's your applied Jobs</h1>
-      <Link to="/dashboard/new">
-        <button className="add-job-button">Add Job</button>
-      </Link>
-      <Routes>
-        <Route path=":action" element={<Form getJobs={getJobs} />} />
-      </Routes>
-      <div>
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search by job title or company name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+      <div className="information-container">
+        {jobs.length > 0 ? (
+          <div className="pie-chart-container">
+            <PieChart data={jobStatusCounts} />
+          </div>
+        ) : null}
+        <div className="section-2">
+          <Link to="/dashboard/new">
+            <button className="add-job-button">Add Job</button>
+          </Link>
+          <Routes>
+            <Route path=":action" element={<Form getJobs={getJobs} />} />
+          </Routes>
+          <div>
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Search by job title or company name"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
       <div className="table-container">
         <table>
