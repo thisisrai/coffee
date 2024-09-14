@@ -2,6 +2,27 @@
   padding: 20px;
 }
 
+.information-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0; /* Remove the space between sections */
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+.pie-chart-container {
+  width: 250px; /* Set a fixed width to ensure PieChart visibility */
+  height: 250px; /* Set a fixed height to ensure PieChart visibility */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the PieChart within the container */
+}
+
+.pie-chart {
+  width: 200px; /* Full width of the container */
+  height: 200px; /* Adjust height to maintain aspect ratio */
+}
+
 .add-job-button {
   margin-bottom: 15px;
   padding: 8px 16px;
@@ -17,12 +38,16 @@
 }
 
 .search-bar {
-  width: 50%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: center;
+  min-width: 300px;
+}
+
+.section-2 {
+  align-content: center;
 }
 
 .table-container {
