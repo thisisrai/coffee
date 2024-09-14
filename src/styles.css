@@ -65,16 +65,82 @@ auth component
 }
 
 .auth form input {
-  background-color: #93cec3;
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
+  background-color: white; /* White background for input fields */
+  color: #333; /* Darker text color for better readability */
+  padding: 12px; /* Increase padding for better spacing */
+  border-radius: 8px; /* Rounded corners for modern look */
+  border: 1px solid #ccc; /* Light gray border */
   display: block;
-  margin: 10px auto;
-  text-align: center;
-  font-size: 1.2em;
+  margin: 15px auto; /* Centering input fields with more margin */
+  max-width: 350px; /* Limit max width */
+  font-size: 1.1em; /* Slightly larger font size */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: box-shadow 0.3s ease; /* Transition for focus effect */
 }
 
+.auth form input:focus {
+  outline: none;
+  border-color: #1aa780; /* Change border color on focus */
+  box-shadow: 0 4px 8px rgba(26, 167, 128, 0.4); /* Larger shadow on focus */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the button horizontally */
+}
+
+/* Button styling for consistency across components */
+.auth-form button,
+.auth-form input[type="submit"] {
+  background-color: #1aa780;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 50%; /* Full width of the form container */
+  max-width: 300px; /* Set a max width to avoid oversized button */
+  margin-top: 10px;
+}
+
+.auth-form button:hover,
+.auth-form input[type="submit"]:hover {
+  background-color: #138965;
+}
+
+/* Styling for the "Forgot Password" Section */
+.forgot-password {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1em;
+  color: #555; /* Subtle gray for the text */
+  font-family: Arial, sans-serif;
+}
+
+.forgot-password div {
+  margin: 10px 0; /* Space between the links */
+}
+
+.forgot-password a {
+  color: #1aa780; /* Match the primary green of the form */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.forgot-password a:hover {
+  color: #138965; /* Darken the green on hover */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on hover */
+}
+
+/* Optional: Add a border or divider between the form and the forgot-password section */
+.auth .forgot-password {
+  border-top: 1px solid #eee; /* Light border for separation */
+  padding-top: 15px; /* Padding above the links */
+}
 /* /////////////////////////
 Dashboard component
 ///////////////////////// */
@@ -182,7 +248,6 @@ Error Message Styles
   border: 1px solid #d8000c; /* Dark red border */
   border-radius: 5px; /* Rounded corners */
   margin: 10px auto; /* Center the message and add spacing */
-  width: 80%; /* Set a width for the message box */
   text-align: center; /* Center the text */
   font-size: 1.1em; /* Slightly larger font */
 }
