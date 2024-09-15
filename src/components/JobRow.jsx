@@ -12,7 +12,7 @@ const JobRow = ({
   handleSaveClick,
   handleDeleteClick,
 }) => {
-  const statusOptions = ["pending", "Interviewing", "offer", "rejected"];
+  const statusOptions = ["pending", "interviewing", "offer", "rejected"];
 
   return (
     <tr>
