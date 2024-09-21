@@ -25,7 +25,6 @@ export const App = (props) => {
       navigate("/auth/login");
     }
   }, []);
-  }, []);
 
   return (
     <>
