@@ -354,6 +354,7 @@ th svg {
 /* /////////////////////////
 Home component
 ///////////////////////// */
+
 .home-wrapper {
   position: relative;
   width: 100%;
@@ -361,22 +362,12 @@ Home component
   overflow: hidden; /* Hide any overflow */
 }
 
-.background-video {
-  position: absolute;
-  object-fit: cover; /* Ensure the video covers the whole container without distortion */
-  z-index: -1; /* Ensure the video is behind the content */
-}
-
 .home-container {
   position: relative;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ensure the content takes up the full viewport */
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Ensure it takes full height */
 }
 
 .home-container p {
@@ -390,6 +381,16 @@ Home component
   display: inline-block;
 }
 
+.background-video {
+  position: fixed; /* Change to fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Use viewport width */
+  height: 100vh; /* Use viewport height */
+  object-fit: cover; /* Ensure the video covers the container */
+  z-index: -1;
+}
+
 /* /////////////////////////
 Error Message Styles
 ///////////////////////// */
@@ -401,10 +402,10 @@ Error Message Styles
   border: 1px solid #d8000c; /* Dark red border */
   border-radius: 5px; /* Rounded corners */
   margin: 10px auto; /* Center the message and add spacing */
+  width: 80%; /* Set a width for the message box */
   text-align: center; /* Center the text */
   font-size: 1.1em; /* Slightly larger font */
 }
-
 /* /////////////////////////
 Form Component
 ///////////////////////// */

@@ -1,3 +1,5 @@
+import React from "react";
+
 const Home = () => {
   return (
     <div className="home-wrapper">
@@ -10,7 +12,7 @@ const Home = () => {
         </p>
         <video
           className="background-video"
-          src="/coffeejob.mp4"
+          src="coffeejob.mp4"
           autoPlay
           loop
           muted
