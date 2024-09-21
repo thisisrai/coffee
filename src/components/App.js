@@ -25,15 +25,17 @@ export const App = (props) => {
       navigate("/auth/login");
     }
   }, []);
-  }, []);
 
   return (
     <>
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/*  Home Page */}
         <Route path="/auth/:form" element={<Auth />} />
+        {/* Login */}
         <Route path="/dashboard/*" element={<Dashboard />} />
+        {/* Job Dashboard */}
         <Route path="/password/forgot" element={<ForgotPassword />} />{" "}
         {/* Forgot Password route */}
         <Route path="/password/reset" element={<ResetPassword />} />{" "}

@@ -10,8 +10,6 @@ root.render(
   <AppState>
     <Router>
       <App />
-      <App />
     </Router>
   </AppState>
-);
 );
