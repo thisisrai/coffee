@@ -402,7 +402,6 @@ Error Message Styles
   border: 1px solid #d8000c; /* Dark red border */
   border-radius: 5px; /* Rounded corners */
   margin: 10px auto; /* Center the message and add spacing */
-  width: 80%; /* Set a width for the message box */
   text-align: center; /* Center the text */
   font-size: 1.1em; /* Slightly larger font */
 }

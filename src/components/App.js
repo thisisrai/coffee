@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
@@ -12,16 +12,13 @@ export const App = (props) => {
   const { state, dispatch } = useAppState();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
 
     if (auth) {
       dispatch({ type: "auth", payload: auth });
       navigate("/dashboard");
-      dispatch({ type: "auth", payload: auth });
-      navigate("/dashboard");
     } else {
-      navigate("/auth/login");
       navigate("/auth/login");
     }
   }, []);
@@ -31,11 +28,8 @@ export const App = (props) => {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/*  Home Page */}
         <Route path="/auth/:form" element={<Auth />} />
-        {/* Login */}
         <Route path="/dashboard/*" element={<Dashboard />} />
-        {/* Job Dashboard */}
         <Route path="/password/forgot" element={<ForgotPassword />} />{" "}
         {/* Forgot Password route */}
         <Route path="/password/reset" element={<ResetPassword />} />{" "}
@@ -44,4 +38,3 @@ export const App = (props) => {
     </>
   );
 };
-
