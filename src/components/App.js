@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
@@ -12,7 +12,7 @@ export const App = (props) => {
   const { state, dispatch } = useAppState();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
 
     if (auth) {
