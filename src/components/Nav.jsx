@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/SideBarButton.css';
 
@@ -31,7 +33,7 @@ const Nav = (props) => {
     <header>
       <h1>Coffee Job</h1>
       <button className="toggle-card-button" onClick={toggleCardVisibility}>
-        Options
+        <FontAwesomeIcon icon={faBars} />
       </button>
       {isCardVisible && (
         <div className="sidebar-card">
