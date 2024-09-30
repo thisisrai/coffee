@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
 import '../styles/SideBarButton.css';
@@ -7,6 +7,7 @@ import '../styles/SideBarButton.css';
 const Nav = (props) => {
   const { state, dispatch } = useAppState();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isCardVisible, setIsCardVisible] = useState(false);
 
   const toggleCardVisibility = () => {
@@ -19,10 +20,12 @@ const Nav = (props) => {
   };
 
   useEffect(() => {
-    if (!state.token) {
+    // Redirect to login only if trying to access a protected route
+    const protectedRoutes = ["/dashboard"];
+    if (!state.token && protectedRoutes.includes(location.pathname)) {
       navigate("/auth/login");
     }
-  }, [state.token, navigate]);
+  }, [state.token, navigate, location.pathname]);
 
   return (
     <header>
@@ -36,12 +39,16 @@ const Nav = (props) => {
             &times;
           </button>
           <nav className="nav-container">
-            <Link to="/">
-              <div>Home</div>
-            </Link>
-            <Link to="/auth/signup">
-              <div>Signup</div>
-            </Link>
+            {!state.token && (
+              <>
+                <Link to="/">
+                  <div>Home</div>
+                </Link>
+                <Link to="/auth/signup">
+                  <div>Signup</div>
+                </Link>
+              </>
+            )}
             {state.token ? (
               <div onClick={handleLogout}>
                 Logout

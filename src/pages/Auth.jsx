@@ -12,6 +12,7 @@ const Auth = (props) => {
   });
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const { state, dispatch } = useAppState();
 
   useEffect(() => {
     if (userData && !userData.error) {
@@ -23,9 +24,7 @@ const Auth = (props) => {
       );
       navigate("/dashboard");
     }
-  }, [userData]);
-
-  const { state, dispatch } = useAppState();
+  }, [userData, dispatch, navigate]);
 
   const actions = {
     signup: () => {
@@ -35,7 +34,12 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error during signup:", error);
+          return { error: "Signup failed. Please try again." };
+        });
     },
     login: () => {
       return fetch(state.url + "/login", {
@@ -44,7 +48,12 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error during login:", error);
+          return { error: "Login failed. Please try again." };
+        });
     },
   };
 
