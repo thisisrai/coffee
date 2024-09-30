@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
@@ -6,14 +6,15 @@ const Auth = (props) => {
   const { form } = useParams();
   const type = form;
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const [userData, setUserData] = React.useState(null);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const { state, dispatch } = useAppState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (userData && !userData.error) {
       const { token, user } = userData;
       dispatch({ type: "auth", payload: { token, username: user.username } });
@@ -23,9 +24,7 @@ const Auth = (props) => {
       );
       navigate("/dashboard");
     }
-  }, [userData]);
-
-  const { state, dispatch } = useAppState();
+  }, [userData, dispatch, navigate]);
 
   const actions = {
     signup: () => {
@@ -35,7 +34,12 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error during signup:", error);
+          return { error: "Signup failed. Please try again." };
+        });
     },
     login: () => {
       return fetch(state.url + "/login", {
@@ -44,7 +48,12 @@ const Auth = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error during login:", error);
+          return { error: "Login failed. Please try again." };
+        });
     },
   };
 

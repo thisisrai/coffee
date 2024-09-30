@@ -43,6 +43,16 @@ module.exports = (env) => {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
         },
+        {
+          test: /\.(mp4|webm|ogg)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]',
+              outputPath: 'videos',
+            },
+          },
+        },
       ],
     },
     plugins: [

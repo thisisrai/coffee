@@ -30,22 +30,14 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "auth":
-      let newState = { ...state, ...action.payload };
-      return newState;
-      break;
+      return { ...state, ...action.payload };
     case "logout":
-      newState = { ...state, token: null, username: null };
       window.localStorage.removeItem("auth");
-      return newState;
-      break;
+      return { ...state, token: null, username: null };
     case "getJobs":
-      newState = { ...state, jobs: action.payload };
-      return newState;
-      break;
+      return { ...state, jobs: action.payload };
     case "select":
-      newState = { ...state, edit: action.payload };
-      return newState;
-      break;
+      return { ...state, edit: action.payload };
     default:
       return state;
   }
@@ -71,10 +63,4 @@ export const AppState = (props) => {
   );
 };
 
-//////////////////////
-// userAppState hook
-//////////////////////
-
-export const useAppState = () => {
-  return useContext(AppContext);
-};
+export const useAppState = () => useContext(AppContext);
