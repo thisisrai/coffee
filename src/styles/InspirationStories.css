@@ -1,0 +1,40 @@
+/* src/components/InspirationStories.css */
+.inspiration-stories {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.story-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px 0; /* Space between cards */
+}
+
+.story-image {
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.loading {
+    font-size: 18px;
+    color: #555;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
