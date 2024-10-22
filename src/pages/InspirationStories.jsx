@@ -34,12 +34,12 @@ const InspirationStories = () => {
       <ul>
         {stories.map((story) => (
           <li key={story.id} className="story-card">
-            <h3>{story.title}</h3>
-            <h4>{story.author}</h4>
-            {story.images && story.images.length > 0 && (
-              <img src={story.images[0]} alt={story.title} className="story-image" />
+            <h3>{story.content.title}</h3>
+            <h4>{story.content.author}</h4>
+            {story.content.images && story.content.images.length > 0 && (
+              <img src={story.content.images[0]} alt={story.content.title} className="story-image" />
             )}
-            <p>{story.paragraphs.join(", ")}</p>
+            <p>{story.content.paragraphs.join(" ")}</p>
           </li>
         ))}
       </ul>
