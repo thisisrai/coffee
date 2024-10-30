@@ -39,7 +39,9 @@ const InspirationStories = () => {
             {story.content.images && story.content.images.length > 0 && (
               <img src={story.content.images[0]} alt={story.content.title} className="story-image" />
             )}
-            <p>{story.content.paragraphs.join(" ")}</p>
+            {story.content.paragraphs.map((paragraph, index) => (
+              <p key={index} className="story-paragraph">{paragraph}</p>
+            ))}
           </li>
         ))}
       </ul>
