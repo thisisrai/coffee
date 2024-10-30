@@ -7,6 +7,7 @@ import ForgotPassword from "../components/ForgotPassword.jsx"; // Import ForgotP
 import ResetPassword from "../components/ResetPassword.jsx"; // Import ResetPassword component
 import { useAppState } from "../AppState.jsx";
 import Nav from "./Nav.jsx";
+import InspirationStories from "../pages/InspirationStories.jsx";
 
 export const App = (props) => {
   const { state, dispatch } = useAppState();
@@ -28,6 +29,7 @@ export const App = (props) => {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/inspiration" element={<InspirationStories />} />
         <Route path="/auth/:form" element={<Auth />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />{" "}
