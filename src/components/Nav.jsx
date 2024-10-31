@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-import '../styles/SideBarButton.css';
+import "../styles/SideBarButton.css";
 
 const Nav = (props) => {
   const { state, dispatch } = useAppState();
@@ -55,9 +55,15 @@ const Nav = (props) => {
               </>
             )}
             {state.token ? (
-              <div onClick={handleLogout}>
-                Logout
-              </div>
+              <>
+                <Link to="/job-listings">
+                  <div>Jobs</div>
+                </Link>
+                <Link to="/dashboard">
+                  <div>Dashboard</div>
+                </Link>
+                <div onClick={handleLogout}>Logout</div>
+              </>
             ) : (
               <Link to="/auth/login">
                 <div>Login</div>
