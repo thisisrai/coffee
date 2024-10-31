@@ -32,12 +32,18 @@
 }
 
 .close-card-button {
-    position: absolute;
-    top: 10px;
+    position: fixed;
+    top: 25px;
     right: 10px;
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    z-index: 3; /* Ensure this is higher than the home-container and background-video */
+    color: black;
+    z-index: 1000;
+    padding: 5px 10px;
+  }
+
+  .close-card-button:hover {
+  opacity: 0.8;
 }

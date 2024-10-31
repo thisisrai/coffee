@@ -8,6 +8,7 @@ import ResetPassword from "../components/ResetPassword.jsx"; // Import ResetPass
 import { useAppState } from "../AppState.jsx";
 import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";
+import JobOpenings from "../pages/JobOpenings.jsx";
 
 export const App = (props) => {
   const { state, dispatch } = useAppState();
@@ -30,6 +31,7 @@ export const App = (props) => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/inspiration" element={<InspirationStories />} />
+        <Route path="/job-listings" element={<JobOpenings />} />
         <Route path="/auth/:form" element={<Auth />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />{" "}
