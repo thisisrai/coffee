@@ -110,7 +110,7 @@ const JobOpenings = () => {
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage >= totalPages}
         >
           Next
         </button>
