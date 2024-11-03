@@ -7,81 +7,51 @@ const JobOpenings = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [lastFetchTime, setLastFetchTime] = useState(null);
   const [location, setLocation] = useState("");
   const [occupation, setOccupation] = useState("");
 
-  const shouldRefetch = () => {
-    if (!lastFetchTime) return true;
-
-    const cachedTime = localStorage.getItem("jobOpeningsTimestamp");
-    if (!cachedTime) return true;
-
-    const now = new Date();
-    const lastFetch = new Date(cachedTime);
-
-    return (
-      now.getDate() !== lastFetch.getDate() ||
-      now.getMonth() !== lastFetch.getMonth() ||
-      now.getFullYear() !== lastFetch.getFullYear()
-    );
-  };
-
   const fetchOpenings = async () => {
+    setLoading(true);
     try {
-      const cachedData = localStorage.getItem("jobOpenings");
-      const cachedTime = localStorage.getItem("jobOpeningsTimestamp");
+      const url = new URL("https://jobrepo.onrender.com/openings/paginated");
+      url.searchParams.append("page", currentPage);
+      if (location) url.searchParams.append("location", location);
+      if (occupation) url.searchParams.append("title", occupation);
 
-      if (cachedData && cachedTime && !shouldRefetch()) {
-        const parsedData = JSON.parse(cachedData);
-        setOpenings(parsedData);
-        setTotalPages(Math.ceil(parsedData.length / 10));
-        setLastFetchTime(cachedTime);
-        setLoading(false);
-        return;
-      }
-
-      localStorage.removeItem("jobOpenings");
-      localStorage.removeItem("jobOpeningsTimestamp");
-
-      const url = `https://jobrepo.onrender.com/openings/paginated`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
 
-      localStorage.setItem("jobOpenings", JSON.stringify(data));
-      localStorage.setItem("jobOpeningsTimestamp", new Date().toISOString());
+      const result = await response.json();
+
+      const data = result.data || result;
+      const totalPages =
+        Math.ceil(result.total_count / 50) || Math.ceil(data.length / 50);
 
       setOpenings(data || []);
-      setTotalPages(Math.ceil(data.length / 10));
-      setLastFetchTime(new Date().toISOString());
+      setTotalPages(totalPages);
     } catch (error) {
       setError(error);
+      console.error("Error fetching openings:", error);
     } finally {
       setLoading(false);
     }
   };
 
+  // Initial fetch on component mount
   useEffect(() => {
     fetchOpenings();
-  }, []);
+  }, [currentPage]); // Fetch openings whenever currentPage changes
 
-  const indexOfLastJob = currentPage * 10;
-  const indexOfFirstJob = indexOfLastJob - 10;
-  
-  const filteredJobs = openings.filter((opening) => {
-    const matchesLocation = location
-      ? opening.location.toLowerCase().includes(location.toLowerCase())
-      : true;
-    const matchesOccupation = occupation
-      ? opening.title.toLowerCase().includes(occupation.toLowerCase())
-      : true;
-    return matchesLocation && matchesOccupation;
-  });
+  const handleSearch = () => {
+    setCurrentPage(1); // Reset to first page
+    fetchOpenings();
+  };
 
-  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error.message}</div>;
@@ -104,10 +74,13 @@ const JobOpenings = () => {
           value={occupation}
           onChange={(e) => setOccupation(e.target.value)}
         />
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
       </div>
       <ul>
-        {currentJobs.length > 0 ? (
-          currentJobs.map((opening) => (
+        {openings.length > 0 ? (
+          openings.map((opening) => (
             <li key={opening.id} className="job-opening-card">
               <h3>{opening.title}</h3>
               <p>{opening.company}</p>
@@ -127,7 +100,7 @@ const JobOpenings = () => {
       </ul>
       <div className="pagination">
         <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
           Previous
@@ -136,9 +109,7 @@ const JobOpenings = () => {
           Page {currentPage} of {totalPages}
         </span>
         <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
+          onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
           Next
