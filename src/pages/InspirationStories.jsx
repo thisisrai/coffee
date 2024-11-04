@@ -6,6 +6,7 @@ const InspirationStories = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -48,11 +49,42 @@ const InspirationStories = () => {
     <div className="inspiration-stories">
       <h1>Inspirational Stories</h1>
       <div className="slider-container">
-        <button className="slider-button prev" onClick={previousStory}>
-          &#8249;
-        </button>
+        {/* Only show buttons on non-mobile devices */}
+        <div className="desktop-controls">
+          <button className="slider-button prev" onClick={previousStory}>
+            &#8249;
+          </button>
+          <button className="slider-button next" onClick={nextStory}>
+            &#8250;
+          </button>
+        </div>
 
-        <div className="story-card">
+        {/* Add touch swipe capability */}
+        <div
+          className="story-card"
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            setTouchStart(touch.clientX);
+          }}
+          onTouchMove={(e) => {
+            if (!touchStart) return;
+            const touch = e.touches[0];
+            const diff = touchStart - touch.clientX;
+
+            if (Math.abs(diff) > 50) {
+              // minimum swipe distance
+              if (diff > 0) {
+                nextStory();
+              } else {
+                previousStory();
+              }
+              setTouchStart(null);
+            }
+          }}
+          onTouchEnd={() => {
+            setTouchStart(null);
+          }}
+        >
           <h3>{currentStory.content.title}</h3>
           <h4>{currentStory.content.author}</h4>
           {currentStory.content.images &&
@@ -63,16 +95,14 @@ const InspirationStories = () => {
                 className="story-image"
               />
             )}
-          {currentStory.content.paragraphs.map((paragraph, index) => (
-            <p key={index} className="story-paragraph">
-              {paragraph}
-            </p>
-          ))}
+          <div className="story-content">
+            {currentStory.content.paragraphs.map((paragraph, index) => (
+              <p key={index} className="story-paragraph">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
-
-        <button className="slider-button next" onClick={nextStory}>
-          &#8250;
-        </button>
       </div>
 
       <div className="slider-dots">
