@@ -74,9 +74,9 @@ const Nav = (props) => {
           <nav className="nav-container">
             {!state.token && (
               <>
-                <Link to="/" onClick={handleNavClick}>
+                {/* <Link to="/" onClick={handleNavClick}>
                   <div>Home</div>
-                </Link>
+                </Link> */}
                 <Link to="/job-listings" onClick={handleNavClick}>
                   <div>Jobs</div>
                 </Link>
