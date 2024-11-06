@@ -81,7 +81,14 @@ const JobOpenings = () => {
       <ul>
         {openings.length > 0 ? (
           openings.map((opening) => (
-            <li key={opening.id} className="job-opening-card">
+            <li
+              key={opening.id}
+              className="job-opening-card"
+              onClick={() =>
+                window.open(opening.job_url, "_blank", "noopener,noreferrer")
+              }
+              style={{ cursor: "pointer" }}
+            >
               <h3>{opening.title}</h3>
               <p>{opening.company}</p>
               <p>{opening.location}</p>
