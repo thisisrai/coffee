@@ -30,6 +30,9 @@ const JobOpenings = () => {
         Math.ceil(result.total_count / 50) || Math.ceil(data.length / 50);
 
       setOpenings(data || []);
+      if (totalPages === 0) {
+        setCurrentPage(0);
+      }
       setTotalPages(totalPages);
     } catch (error) {
       setError(error);
@@ -53,6 +56,12 @@ const JobOpenings = () => {
     setCurrentPage(newPage);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error.message}</div>;
 
@@ -66,6 +75,7 @@ const JobOpenings = () => {
           placeholder="Search by location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <input
           type="text"
@@ -73,6 +83,7 @@ const JobOpenings = () => {
           placeholder="Search by occupation (e.g., engineer)"
           value={occupation}
           onChange={(e) => setOccupation(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <button onClick={handleSearch} className="search-button">
           Search
@@ -111,7 +122,7 @@ const JobOpenings = () => {
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || currentPage === 0}
         >
           Previous
         </button>
