@@ -92,6 +92,9 @@ const JobOpenings = () => {
               <h3>{opening.title}</h3>
               <p>{opening.company}</p>
               <p>{opening.location}</p>
+              <p className="posted-on">
+                Posted on: {new Date(opening.posted_on).toLocaleDateString()}
+              </p>
               <a
                 href={opening.job_url}
                 target="_blank"
