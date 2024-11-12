@@ -20,22 +20,3 @@ header h1 {
     4px 4px 0 rgba(0, 0, 0, 0.1);
 
 }
-
-.sidebar-card {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 250px;
-  background-color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 60px 20px 20px;
-  z-index: 999;
-}
-
-
-.nav-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
