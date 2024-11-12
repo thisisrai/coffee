@@ -70,8 +70,8 @@ const JobRow = ({
             />
           </td>
           <td data-label="Actions">
-            <button onClick={handleSaveClick}>Save</button>
-            <button onClick={handleCancelClick}>Cancel</button>
+            <button className="save-button" onClick={handleSaveClick}>Save</button>
+            <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
           </td>
         </>
       ) : (
@@ -105,8 +105,8 @@ const JobRow = ({
           </td>
           <td data-label="Company">{job.company}</td>
           <td data-label="Actions">
-            <button onClick={() => handleEditClick(job)}>Edit</button>
-            <button onClick={() => handleDeleteClick(job.id)}>Delete</button>
+            <button className="edit-button" onClick={() => handleEditClick(job)}>Edit</button>
+            <button className="delete-button" onClick={() => handleDeleteClick(job.id)}>Delete</button>
           </td>
         </>
       )}

@@ -10,7 +10,7 @@ import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";
 import JobOpenings from "../pages/JobOpenings.jsx";
 
-export const App = (props) => {
+export const App = () => {
   const { state, dispatch } = useAppState();
   const navigate = useNavigate();
 

@@ -6,7 +6,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/SideBarButton.css";
 
-const Nav = (props) => {
+const Nav = () => {
   const { state, dispatch } = useAppState();
   const navigate = useNavigate();
   const location = useLocation();
