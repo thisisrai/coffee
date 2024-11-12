@@ -54,3 +54,61 @@
 .status-rejected {
   background-color: #e74c3c; /* Red */
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.save-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-left: 10px;
+}
+
+.save-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.cancel-button {
+  background-color: #e74c3c; /* Red */
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05); 
+}
+
+.edit-button {
+  background-color: #f1c40f; /* Yellow */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #e0b10f;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #e74c3c; /* Red */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/SideBarButton.css";
+import "../styles/Nav.css";
 
 const Nav = (props) => {
   const { state, dispatch } = useAppState();

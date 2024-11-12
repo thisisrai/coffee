@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppState } from "../AppState.jsx";
 
-const Auth = (props) => {
+const Auth = () => {
   const { form } = useParams();
   const type = form;
 

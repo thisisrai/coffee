@@ -3,6 +3,24 @@ header {
   z-index: 1000;
 }
 
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  padding: 10px;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-shadow: 
+    1px 1px 0 rgba(255, 255, 255, 0.5),
+    2px 2px 0 rgba(0, 0, 0, 0.3),
+    3px 3px 0 rgba(0, 0, 0, 0.2),
+    4px 4px 0 rgba(0, 0, 0, 0.1);
+
+}
+
 .sidebar-card {
   position: fixed;
   top: 0;
