@@ -9,6 +9,7 @@ const JobOpenings = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [location, setLocation] = useState("");
   const [occupation, setOccupation] = useState("");
+  const [company, setCompany] = useState("");
 
   const fetchOpenings = async () => {
     setLoading(true);
@@ -17,6 +18,7 @@ const JobOpenings = () => {
       url.searchParams.append("page", currentPage);
       if (location) url.searchParams.append("location", location);
       if (occupation) url.searchParams.append("title", occupation);
+      if (company) url.searchParams.append("company", company);
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -45,7 +47,7 @@ const JobOpenings = () => {
   // Initial fetch on component mount
   useEffect(() => {
     fetchOpenings();
-  }, [currentPage]); // Fetch openings whenever currentPage changes
+  }, [currentPage, company]); // Fetch openings whenever currentPage changes
 
   const handleSearch = () => {
     setCurrentPage(1); // Reset to first page
@@ -72,19 +74,24 @@ const JobOpenings = () => {
         <input
           type="text"
           className="search-input"
-          placeholder="Search by location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <input
-          type="text"
-          className="search-input"
           placeholder="Search by occupation (e.g., engineer)"
           value={occupation}
           onChange={(e) => setOccupation(e.target.value)}
           onKeyDown={handleKeyPress}
         />
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search by location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          onKeyDown={handleKeyPress}
+        />
+        {company && (
+          <button className="company-filter-tag" onClick={() => setCompany("")}>
+            {company} ×
+          </button>
+        )}
         <button onClick={handleSearch} className="search-button">
           Search
         </button>
@@ -92,27 +99,37 @@ const JobOpenings = () => {
       <ul>
         {openings.length > 0 ? (
           openings.map((opening) => (
-            <li
-              key={opening.id}
-              className="job-opening-card"
-              onClick={() =>
-                window.open(opening.job_url, "_blank", "noopener,noreferrer")
-              }
-              style={{ cursor: "pointer" }}
-            >
+            <li key={opening.id} className="job-opening-card">
               <h3>{opening.title}</h3>
               <p>{opening.company}</p>
               <p>{opening.location}</p>
               <p className="posted-on">
                 Posted on: {new Date(opening.posted_on).toLocaleDateString()}
               </p>
-              <a
-                href={opening.job_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Job
-              </a>
+              <div className="button-group">
+                <a
+                  href={opening.job_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Job
+                </a>
+                {!company && ( // Only show this button when there's no company filter
+                  <a
+                    href={`?company=${encodeURIComponent(opening.company)}`}
+                    className="company-jobs-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOccupation("");
+                      setLocation("");
+                      setCurrentPage(1);
+                      setCompany(opening.company);
+                    }}
+                  >
+                    View All Jobs from {opening.company}
+                  </a>
+                )}
+              </div>
             </li>
           ))
         ) : (

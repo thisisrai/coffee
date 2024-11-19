@@ -140,3 +140,43 @@ ul {
   margin-top: 5px;
   font-style: italic;
 }
+
+.job-opening-card .button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: flex-start; /* Align buttons to the left */
+}
+
+.job-opening-card .button-group a {
+  margin-top: 0;
+  flex: 0 auto; /* Remove flex grow, allow natural width */
+  text-align: center;
+  padding: 8px 16px; /* Reduce padding */
+  font-size: 0.9rem; /* Slightly smaller font */
+}
+
+.job-opening-card .company-jobs-button {
+  background-color: #4a90e2;
+}
+
+.job-opening-card .company-jobs-button:hover {
+  background-color: #357abd;
+}
+
+.company-filter-tag {
+  padding: 8px 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.company-filter-tag:hover {
+  background-color: #357abd;
+}
