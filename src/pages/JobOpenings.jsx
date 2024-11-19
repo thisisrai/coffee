@@ -16,8 +16,8 @@ const JobOpenings = () => {
     try {
       const url = new URL("https://jobrepo.onrender.com/openings/paginated");
       url.searchParams.append("page", currentPage);
-      if (location) url.searchParams.append("location", location);
-      if (occupation) url.searchParams.append("title", occupation);
+      if (location) url.searchParams.append("location", location.trim());
+      if (occupation) url.searchParams.append("title", occupation.trim());
       if (company) url.searchParams.append("company", company);
 
       const response = await fetch(url);
