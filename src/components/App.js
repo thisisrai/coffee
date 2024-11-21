@@ -29,7 +29,7 @@ export const App = () => {
     <>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<JobOpenings />} />
         <Route path="/inspiration" element={<InspirationStories />} />
         <Route path="/job-listings" element={<JobOpenings />} />
         <Route path="/auth/:form" element={<Auth />} />
