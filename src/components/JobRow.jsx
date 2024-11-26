@@ -45,28 +45,34 @@ const JobRow = ({
                 />
               )}
           </td>
-          <td data-label="Title">
+          <td data-label="Title" className="edit-cell">
             <input
               type="text"
               name="title"
               value={editFormData.title}
               onChange={handleInputChange}
+              className="edit-input"
+              placeholder="Enter job title"
             />
           </td>
-          <td data-label="Application URL">
+          <td data-label="Application URL" className="edit-cell">
             <input
               type="text"
               name="application_url"
               value={editFormData.application_url}
               onChange={handleInputChange}
+              className="edit-input"
+              placeholder="Enter application URL"
             />
           </td>
-          <td data-label="Company">
+          <td data-label="Company" className="edit-cell">
             <input
               type="text"
               name="company"
               value={editFormData.company}
               onChange={handleInputChange}
+              className="edit-input"
+              placeholder="Enter company name"
             />
           </td>
           <td data-label="Actions">
