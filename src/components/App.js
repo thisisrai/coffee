@@ -21,7 +21,7 @@ export const App = () => {
       dispatch({ type: "auth", payload: auth });
       navigate("/dashboard");
     } else {
-      navigate("/auth/login");
+      navigate("/jobs");
     }
   }, []);
 
