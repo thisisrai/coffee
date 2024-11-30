@@ -3,8 +3,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
-import ForgotPassword from "../components/ForgotPassword.jsx"; // Import ForgotPassword component
-import ResetPassword from "../components/ResetPassword.jsx"; // Import ResetPassword component
+import ForgotPassword from "../components/ForgotPassword.jsx";
+import ResetPassword from "../components/ResetPassword.jsx";
 import { useAppState } from "../AppState.jsx";
 import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";

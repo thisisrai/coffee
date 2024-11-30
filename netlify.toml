@@ -1,7 +1,4 @@
 [[redirects]]
-  from = "https://coffeejob.netlify.app/*"
-  to = "https://coffeejob.netlify.app/"
-
-[[redirects]]
-  from = "https://coffeejob.io/*"
-  to = "https://coffeejob.io/"
+  from = "/*"
+  to = "/index.html"
+  status = 200
