@@ -3,12 +3,14 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
+import AdminDashboard from "../admin-dashboard/AdminDashboard.jsx";
 import ForgotPassword from "../components/ForgotPassword.jsx";
 import ResetPassword from "../components/ResetPassword.jsx";
 import { useAppState } from "../AppState.jsx";
 import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";
 import JobOpenings from "../pages/JobOpenings.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 export const App = () => {
   const { state, dispatch } = useAppState();
@@ -16,7 +18,6 @@ export const App = () => {
 
   useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
-
     if (auth) {
       dispatch({ type: "auth", payload: auth });
       navigate("/dashboard");
@@ -29,15 +30,33 @@ export const App = () => {
     <>
       <Nav />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<JobOpenings />} />
         <Route path="/inspiration" element={<InspirationStories />} />
         <Route path="/job-listings" element={<JobOpenings />} />
         <Route path="/auth/:form" element={<Auth />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="/password/forgot" element={<ForgotPassword />} />{" "}
-        {/* Forgot Password route */}
-        <Route path="/password/reset" element={<ResetPassword />} />{" "}
-        {/* Reset Password route */}
+        <Route path="/password/forgot" element={<ForgotPassword />} />
+        <Route path="/password/reset" element={<ResetPassword />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard/*"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
