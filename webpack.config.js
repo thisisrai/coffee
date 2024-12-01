@@ -8,9 +8,9 @@ module.exports = (env) => {
   return {
     entry: "./src/index.jsx",
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "build"), // Changed from 'dist' to 'build'
       filename: "bundle.[contenthash].js",
-      publicPath: "/"
+      publicPath: "/",
     },
     mode: isProduction ? "production" : "development",
     module: {
@@ -19,31 +19,31 @@ module.exports = (env) => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
+            loader: "babel-loader",
+          },
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
-        }
-      ]
+          use: ["style-loader", "css-loader"],
+        },
+      ],
     },
     resolve: {
-      extensions: [".js", ".jsx"]
+      extensions: [".js", ".jsx"],
     },
     devServer: {
       historyApiFallback: true,
       hot: true,
       port: process.env.PORT || 3000,
       static: {
-        directory: path.join(__dirname, "public")
-      }
+        directory: path.join(__dirname, "public"),
+      },
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: "./src/index.html"
-      })
-    ]
+        template: "./src/index.html",
+      }),
+    ],
   };
 };
