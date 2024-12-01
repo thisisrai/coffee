@@ -96,6 +96,11 @@ const Nav = () => {
                 <Link to="/dashboard" onClick={handleNavClick}>
                   <div>Dashboard</div>
                 </Link>
+                {['thisisrailee@gmail.com', 'rai@coffeejob.io', 'kavin@coffeejob.io', 'tjhan.kavin@gmail.com'].includes(state.username) && (
+                  <Link to="/admin" onClick={handleNavClick}>
+                    <div>Admin</div>
+                  </Link>
+                )}
                 <Link to="/inspiration" onClick={handleNavClick}>
                   <div>Inspiration</div>
                 </Link>
