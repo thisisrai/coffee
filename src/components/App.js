@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import AdminDashboard from "../admin-dashboard/AdminDashboard.jsx";
@@ -18,12 +17,12 @@ export const App = () => {
 
   useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
-    if (auth) {
-      dispatch({ type: "auth", payload: auth });
-      navigate("/dashboard");
-    } else {
-      navigate("/job-listings");
-    }
+    // if (auth) {
+    //   dispatch({ type: "auth", payload: auth });
+    //   navigate("/dashboard");
+    // } else {
+    //   navigate("/job-listings");
+    // }
   }, []);
 
   return (
