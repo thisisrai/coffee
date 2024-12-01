@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "../pages/Home.jsx";
 import Auth from "../pages/Auth.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import AdminDashboard from "../admin-dashboard/AdminDashboard.jsx";
 import ForgotPassword from "../components/ForgotPassword.jsx";
 import ResetPassword from "../components/ResetPassword.jsx";
+import NotFound from "../pages/NotFound.jsx"; // Import the NotFound component
 import { useAppState } from "../AppState.jsx";
 import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";
@@ -18,12 +18,12 @@ export const App = () => {
 
   useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
-    if (auth) {
-      dispatch({ type: "auth", payload: auth });
-      navigate("/dashboard");
-    } else {
-      navigate("/job-listings");
-    }
+    // if (auth) {
+    //   dispatch({ type: "auth", payload: auth });
+    //   navigate("/dashboard");
+    // } else {
+    //   navigate("/job-listings");
+    // }
   }, []);
 
   return (
@@ -37,7 +37,6 @@ export const App = () => {
         <Route path="/auth/:form" element={<Auth />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset" element={<ResetPassword />} />
-
         {/* Protected Routes */}
         <Route
           path="/dashboard/*"
@@ -47,7 +46,6 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
-
         {/* Admin Routes */}
         <Route
           path="/admin/*"
@@ -57,6 +55,9 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        {/* 404 Route */}
+        <Route path="*" element={<NotFound />} />{" "}
+        {/* Catch-all route for 404 */}
       </Routes>
     </>
   );

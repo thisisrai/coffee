@@ -1,7 +1,16 @@
 [[redirects]]
-  from = "https://coffeejob.netlify.app/*"
-  to = "https://coffeejob.netlify.app/"
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
-  from = "https://coffeejob.io/*"
-  to = "https://coffeejob.io/"
+  from = "https://coffeejob.netlify.app/*"
+  to = "https://coffeejob.io/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://coffeejob.netlify.app/*"
+  to = "https://coffeejob.io/:splat"
+  status = 301
+  force = true
