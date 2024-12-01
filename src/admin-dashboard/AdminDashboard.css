@@ -1,0 +1,266 @@
+.admin-dashboard {
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 30px auto;
+  }
+  
+  .admin-dashboard h1 {
+    color: #1aa780;
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-align: center;
+  }
+  
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-evenly;
+    margin-bottom: 40px;
+  }
+  
+  .stat-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #eef2f7;
+    min-width: 200px;
+    text-align: center;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card h3 {
+    color: #666;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+  }
+  
+  .stat-value {
+    color: #1aa780;
+    font-size: 2.5em;
+    font-weight: bold;
+  }
+  
+  .recent-applications {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f7;
+  }
+  
+  .recent-applications h2 {
+    color: #1aa780;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    color: black;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .status-badge.pending {
+    background-color: #f1c40f;
+  }
+  
+  .status-badge.interviewing {
+    background-color: #2ecc71;
+  }
+  
+  .status-badge.rejected {
+    background-color: #e74c3c;
+  }
+  
+  .status-badge.offer {
+    background-color: #27ae60;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-dashboard {
+      padding: 15px;
+      margin: 15px;
+    }
+    
+    .stats-grid {
+      flex-direction: column;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .search-bar {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .action-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  
+  .action-button.edit {
+    background-color: #1aa780;
+    color: white;
+  }
+  
+  .action-button.delete {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .action-button.save {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .action-button.cancel {
+    background-color: #95a5a6;
+    color: white;
+  }
+  
+  .action-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+  input[type="text"], select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+  }
+  
+  .companies-section {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f7;
+  }
+  
+  .companies-section h2 {
+    color: #1aa780;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-align: center;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container .search-bar {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .company-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 0 20px;
+  }
+  
+  .company-form input {
+    flex: 1;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .company-form .add-job-button {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  
+  .company-form .add-job-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .company-form {
+      flex-direction: column;
+      padding: 0 10px;
+    }
+    
+    .company-form input {
+      max-width: 100%;
+    }
+  }
