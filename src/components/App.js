@@ -18,12 +18,9 @@ export const App = () => {
 
   useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
-    // if (auth) {
-    //   dispatch({ type: "auth", payload: auth });
-    //   navigate("/dashboard");
-    // } else {
-    //   navigate("/job-listings");
-    // }
+    if (auth) {
+      dispatch({ type: "auth", payload: auth });
+    }
   }, []);
 
   return (
