@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --watch",
-    "dev": "cross-env PORT=4000 webpack-dev-server --open",
-    "build": "webpack --env production=true"
+    "watch": "webpack --watch --mode development",
+    "dev": "cross-env PORT=4000 webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
