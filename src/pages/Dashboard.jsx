@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom"; // Import useNavigate
 import { useAppState } from "../AppState.jsx";
 import Form from "../components/Form.jsx";
 import JobRow from "../components/JobRow.jsx";
@@ -17,6 +17,8 @@ const Dashboard = () => {
     direction: "descending",
   });
   const [searchQuery, setSearchQuery] = useState("");
+  const [isAuthReady, setIsAuthReady] = useState(false);
+  const navigate = useNavigate();
 
   const getJobs = async () => {
     const response = await fetch(`${url}/jobs`, {
@@ -30,8 +32,21 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    getJobs();
+    const auth = JSON.parse(window.localStorage.getItem("auth"));
+
+    if (auth) {
+      dispatch({ type: "auth", payload: auth });
+      setIsAuthReady(true);
+    } else {
+      navigate("/auth/login");
+    }
   }, []);
+
+  useEffect(() => {
+    if (isAuthReady) {
+      getJobs();
+    }
+  }, [isAuthReady]);
 
   const filteredJobs = useMemo(() => {
     return jobs.filter(

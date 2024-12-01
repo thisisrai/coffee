@@ -43,14 +43,6 @@ const Nav = () => {
     };
   }, [isCardVisible]);
 
-  // Handle navigation protection
-  useEffect(() => {
-    const protectedRoutes = ["/dashboard"];
-    if (!state.token && protectedRoutes.includes(location.pathname)) {
-      navigate("/auth/login");
-    }
-  }, [state.token, navigate, location.pathname]);
-
   // Handle navigation link clicks
   const handleNavClick = () => {
     setIsCardVisible(false);
@@ -96,7 +88,12 @@ const Nav = () => {
                 <Link to="/dashboard" onClick={handleNavClick}>
                   <div>Dashboard</div>
                 </Link>
-                {['thisisrailee@gmail.com', 'rai@coffeejob.io', 'kavin@coffeejob.io', 'tjhan.kavin@gmail.com'].includes(state.username) && (
+                {[
+                  "thisisrailee@gmail.com",
+                  "rai@coffeejob.io",
+                  "kavin@coffeejob.io",
+                  "tjhan.kavin@gmail.com",
+                ].includes(state.username) && (
                   <Link to="/admin" onClick={handleNavClick}>
                     <div>Admin</div>
                   </Link>

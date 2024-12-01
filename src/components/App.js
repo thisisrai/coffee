@@ -34,7 +34,7 @@ export const App = () => {
         <Route path="/auth/:form" element={<Auth />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset" element={<ResetPassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         {/* Admin Routes */}
         <Route
           path="/admin/*"

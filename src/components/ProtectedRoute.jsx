@@ -16,7 +16,11 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
       "kavin@coffeejob.io",
       "tjhan.kavin@gmail.com",
     ];
-    return allowedUsers.includes(username) ? children : <Navigate to="/dashboard" replace />;
+    return allowedUsers.includes(username) ? (
+      children
+    ) : (
+      <Navigate to="/dashboard" replace />
+    );
   }
 
   return children;
