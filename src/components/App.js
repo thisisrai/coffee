@@ -11,6 +11,7 @@ import Nav from "./Nav.jsx";
 import InspirationStories from "../pages/InspirationStories.jsx";
 import JobOpenings from "../pages/JobOpenings.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import Integration from "../pages/Integration.jsx";
 
 export const App = () => {
   const { state, dispatch } = useAppState();
@@ -35,6 +36,7 @@ export const App = () => {
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset" element={<ResetPassword />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/integration" element={<Integration />} />
         {/* Admin Routes */}
         <Route
           path="/admin/*"

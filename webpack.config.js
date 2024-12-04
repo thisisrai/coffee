@@ -16,6 +16,17 @@ module.exports = (env) => {
     module: {
       rules: [
         {
+          test: /\.(png|jpe?g|gif|svg)$/i, // Match image file types
+          use: [
+            {
+              loader: "file-loader", // or 'url-loader'
+              options: {
+                name: "[path][name].[ext]", // Preserve original file name and path
+              },
+            },
+          ],
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {

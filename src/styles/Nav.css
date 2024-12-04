@@ -1,21 +1,15 @@
-header {
-  position: relative;
-  z-index: 1000;
+.integration-button {
+  background-color: #1aa780; /* Primary color for the button */
+  color: white; /* Text color */
+  padding: 10px 15px; /* Padding for the button */
+  border-radius: 5px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center the text */
+  margin: 10px 0; /* Margin for spacing */
+  transition: background-color 0.3s; /* Transition for hover effect */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
-header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  margin: 0;
-  padding: 10px;
-  font-family: sans-serif;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  color: #ffffff;
-  text-shadow: 
-    1px 1px 0 rgba(255, 255, 255, 0.5),
-    2px 2px 0 rgba(0, 0, 0, 0.3),
-    3px 3px 0 rgba(0, 0, 0, 0.2),
-    4px 4px 0 rgba(0, 0, 0, 0.1);
+.integration-button:hover {
+  background-color: #138965; /* Darker shade on hover */
 }

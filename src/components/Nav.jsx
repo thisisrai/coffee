@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/SideBarButton.css";
+import "../styles/Nav.css"; // Ensure you import the Nav CSS for styling
 
 const Nav = () => {
   const { state, dispatch } = useAppState();
@@ -50,7 +51,9 @@ const Nav = () => {
 
   return (
     <header>
-      <h1>Coffee Job</h1>
+      <Link to="/" className="nav-title">
+        <h1>Coffee Job</h1>
+      </Link>
       <button
         className="toggle-card-button"
         onClick={toggleCardVisibility}
@@ -66,9 +69,6 @@ const Nav = () => {
           <nav className="nav-container">
             {!state.token && (
               <>
-                {/* <Link to="/" onClick={handleNavClick}>
-                  <div>Home</div>
-                </Link> */}
                 <Link to="/job-listings" onClick={handleNavClick}>
                   <div>Jobs</div>
                 </Link>
@@ -76,7 +76,7 @@ const Nav = () => {
                   <div>Inspiration</div>
                 </Link>
                 <Link to="/auth/signup" onClick={handleNavClick}>
-                  <div>Signup</div>
+                  <div>Sign Up</div>
                 </Link>
               </>
             )}
@@ -105,9 +105,15 @@ const Nav = () => {
               </>
             ) : (
               <Link to="/auth/login" onClick={handleNavClick}>
-                <div>Login</div>
+                <div>Log In</div>
               </Link>
             )}
+            {/* New Integration Button */}
+            <Link to="/integration" onClick={handleNavClick}>
+              <div className="integration-button">
+                Integration for Recruiters
+              </div>
+            </Link>
           </nav>
         </div>
       )}

@@ -1,0 +1,84 @@
+.integration-request {
+  padding: 20px; /* Add padding for spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content */
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  box-sizing: border-box; /* Include padding in width calculations */
+}
+
+.integration-request h3 {
+  color: #333; /* Dark text color for the heading */
+  text-align: center; /* Center the heading text */
+}
+
+.integration-request p {
+  text-align: center; /* Center the paragraph text */
+  margin-bottom: 20px; /* Space below the paragraph */
+}
+
+.integration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between form elements */
+  background-color: #f9f9f9; /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 400px; /* Set a max width for the form */
+  width: 100%; /* Full width on mobile */
+}
+
+.integration-form label {
+  font-size: 1em; /* Consistent font size */
+  color: #333; /* Dark text color */
+  text-align: left; /* Align label text to the left */
+  width: 100%; /* Ensure label takes full width */
+}
+
+.integration-form input[type="email"],
+.integration-form textarea {
+  padding: 15px; /* Increased padding for input fields */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light gray border */
+  font-size: 1em; /* Consistent font size */
+  width: 100%; /* Full width on mobile */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effect */
+  resize: vertical; /* Allow vertical resizing for the textarea */
+}
+
+.integration-form input[type="email"]:focus,
+.integration-form textarea:focus {
+  border-color: #1aa780; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(26, 167, 128, 0.5); /* Shadow effect on focus */
+  outline: none; /* Remove default outline */
+}
+
+.integration-form button {
+  padding: 10px; /* Padding for the button */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* No border */
+  background-color: #1aa780; /* Primary button color */
+  color: white; /* Text color */
+  font-size: 1em; /* Consistent font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition for hover effect */
+  width: 100%; /* Full width on mobile */
+}
+
+.integration-form button:hover {
+  background-color: #138965; /* Darker shade on hover */
+}
+
+.status-message {
+  margin-top: 20px; /* Space above the status message */
+  font-size: 1.1em; /* Slightly larger font size */
+  text-align: center; /* Center the status message */
+  padding: 10px; /* Padding around the message */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #e0f7fa; /* Light blue background for success */
+  color: #00796b; /* Dark teal text color for success */
+  border: 1px solid #b2ebf2; /* Light blue border */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
