@@ -76,7 +76,7 @@ const Nav = () => {
                   <div>Inspiration</div>
                 </Link>
                 <Link to="/auth/signup" onClick={handleNavClick}>
-                  <div>Sign Up</div>
+                  <div>Sign up</div>
                 </Link>
               </>
             )}
@@ -101,11 +101,11 @@ const Nav = () => {
                 <Link to="/inspiration" onClick={handleNavClick}>
                   <div>Inspiration</div>
                 </Link>
-                <div onClick={handleLogout}>Logout</div>
+                <div onClick={handleLogout}>Log out</div>
               </>
             ) : (
               <Link to="/auth/login" onClick={handleNavClick}>
-                <div>Log In</div>
+                <div>Log in</div>
               </Link>
             )}
             {/* New Integration Button */}
