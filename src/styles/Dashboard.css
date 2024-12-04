@@ -77,3 +77,17 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd;
 }
+
+.blurred {
+  filter: blur(5px); /* Adjust the blur amount as needed */
+  pointer-events: none; /* Prevent interaction with the blurred element */
+  max-width: 250px;
+}
+
+.toggle-blur-button {
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  margin-top: 10px; /* Space above the button */
+  font-size: 1.5em; /* Increase font size for visibility */
+}

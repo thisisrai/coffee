@@ -5,6 +5,8 @@ import Form from "../components/Form.jsx";
 import JobRow from "../components/JobRow.jsx";
 import SortHeader from "../components/SortHeader.jsx";
 import PieChart from "../components/PieChart.jsx"; // Import your PieChart component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesome for icons
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; // Import eye icons
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
@@ -18,6 +20,7 @@ const Dashboard = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [isBlurred, setIsBlurred] = useState(true); // State to manage blur effect
   const navigate = useNavigate();
 
   const getJobs = async () => {
@@ -145,7 +148,17 @@ const Dashboard = () => {
       <div className="information-container">
         {jobs.length > 0 ? (
           <div className="pie-chart-container">
-            <PieChart data={jobStatusCounts} />
+            <div className={isBlurred ? "blurred" : ""}>
+              {" "}
+              {/* Apply blur class conditionally */}
+              <PieChart data={jobStatusCounts} />
+            </div>
+            <button
+              onClick={() => setIsBlurred(!isBlurred)}
+              className="toggle-blur-button"
+            >
+              <FontAwesomeIcon icon={isBlurred ? faEyeSlash : faEye} />
+            </button>
           </div>
         ) : null}
         <div className="section-2">
